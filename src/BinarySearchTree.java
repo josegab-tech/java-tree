@@ -33,4 +33,50 @@ public class BinarySearchTree<T extends Comparable<T>> {
         System.out.println();
     }
 
+    private void inOrder(Node<T> raiz) {
+        if (raiz == null) {
+            return;
+        }
+        inOrder(raiz.esquerda);
+        System.out.print(raiz.dado + " ");
+        inOrder(raiz.direita);
+    }
+
+    public void inOrder() {
+        inOrder(this.raiz);
+        System.out.println();
+    }
+
+    private void postOrder(Node<T> raiz) {
+        if (raiz == null) {
+            return;
+        }
+        postOrder(raiz.esquerda);
+        postOrder(raiz.direita);
+        System.out.print(raiz.dado + " ");
+    }
+
+    public void postOrder() {
+        postOrder(this.raiz);
+        System.out.println();
+    }
+
+    public T buscar(T dadoBusca) {
+        return (T) buscar(this.raiz, dadoBusca);
+    }
+
+    private T buscar(Node<T> raiz, T dadoBusca) {
+        if (raiz == null)
+            return null; // Dado não encontrado na árvore
+
+        if (raiz.dado.equals(dadoBusca))
+            return raiz.dado; // Dado encontrado
+
+        if (dadoBusca.compareTo(raiz.dado) < 0)
+            return buscar(raiz.esquerda, dadoBusca);
+        else
+            return buscar(raiz.direita, dadoBusca);
+    }
+
+
 }
