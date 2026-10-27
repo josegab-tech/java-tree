@@ -17,31 +17,35 @@ public class App {
     
      public static void main(String[] args) throws Exception {
         Scanner leia = new Scanner(System.in);
-        BinarySearchTree<Integer> arvore = new BinarySearchTree<>(); // Instanciar a arvore
+        BinarySearchTree<Aluno> arvore = new BinarySearchTree<>(); // Instanciar a arvore
         int opcao=0;
         do {
             System.out.println("----------------------------------");
             opcao = menu();
             switch (opcao) {
                 case 1:
-                    System.out.print("Digite o elemento a ser inserido: ");
-                    int elementoInserir = leia.nextInt();
-                    arvore.add(elementoInserir);
+                    System.out.print("Digite o nome do aluno: ");
+                    String nome = leia.next();
+                    System.out.print("Digite a matrícula do aluno: ");
+                    int matricula = leia.nextInt();
+                    leia.nextLine();
+                    Aluno aluno = new Aluno(nome, matricula);
+                    arvore.add(aluno);
                     System.out.println("Elemento inserido com sucesso!");
                     break;
                 case 2:
-                    System.out.print("Digite o elemento a ser removido: ");
+                    System.out.print("Digite a matrícula do aluno a ser removido: ");
                     int elementoRemover = leia.nextInt();
                     // Implementar a remoção do elemento na árvore
                    
                     System.out.println("Elemento removido com sucesso!");
                     break;
                 case 3:
-                    System.out.print("Digite o elemento a ser buscado: ");
+                    System.out.print("Digite a matrícula do aluno a ser buscado: ");
                     int elementoBuscar = leia.nextInt();
-                    Integer resultado = arvore.buscar(elementoBuscar);
+                    Integer resultado = arvore.buscar(new Aluno("", elementoBuscar)).getMatricula();
                     if (resultado != null) {
-                        System.out.println("Elemento " + resultado + " encontrado!");
+                        System.out.println("Elemento encontrado na árvore: " + resultado.toString());
                     } else {
                         System.out.println("Elemento não encontrado na árvore!");
                     }

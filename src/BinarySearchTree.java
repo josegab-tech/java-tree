@@ -63,6 +63,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public T buscar(T dadoBusca) {
         return (T) buscar(this.raiz, dadoBusca);
+        
     }
 
     private T buscar(Node<T> raiz, T dadoBusca) {
