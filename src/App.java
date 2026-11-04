@@ -35,7 +35,9 @@ public class App {
                     break;
                 case 2:
                     System.out.print("Digite a matrícula do aluno a ser removido: ");
-                    int elementoRemover = leia.nextInt();
+                    int matriculaRemover = leia.nextInt();
+                    Aluno alunoRemover = new Aluno("", matriculaRemover);
+                    arvore.remove(alunoRemover);
                     // Implementar a remoção do elemento na árvore
                    
                     System.out.println("Elemento removido com sucesso!");
