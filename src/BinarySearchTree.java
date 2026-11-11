@@ -1,5 +1,10 @@
+// BinarySearchTree.java
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> raiz;
+
+    public BinarySearchTree() {
+        this.raiz = null;
+    }
 
     private Node<T> add(Node<T> raiz, Node<T> novoNo) {
         if (raiz == null) {
@@ -14,18 +19,16 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }// fim funcao inserir
 
     public void add(T dado) {
-        Node<T> node = new Node<>(dado);
-        this.raiz = add(raiz, node);
+        Node<T> novoNo = new Node<>(dado);
+        this.raiz = add(raiz, novoNo);
     }
 
     private void preOrder(Node<T> raiz) {
-        if (raiz == null) {
-            return;
+        if (raiz != null) {
+            System.out.print(raiz.dado + " ");
+            preOrder(raiz.esquerda);
+            preOrder(raiz.direita);
         }
-
-        System.out.print(raiz.dado + " ");
-        preOrder(raiz.esquerda);
-        preOrder(raiz.direita);
     }
 
     public void preOrder() {
@@ -34,12 +37,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private void inOrder(Node<T> raiz) {
-        if (raiz == null) {
-            return;
+        if (raiz != null) {
+            inOrder(raiz.esquerda);
+            System.out.print(raiz.dado + " ");
+            inOrder(raiz.direita);
         }
-        inOrder(raiz.esquerda);
-        System.out.print(raiz.dado + " ");
-        inOrder(raiz.direita);
     }
 
     public void inOrder() {
@@ -48,12 +50,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private void postOrder(Node<T> raiz) {
-        if (raiz == null) {
-            return;
+        if (raiz != null) {
+            postOrder(raiz.esquerda);
+            postOrder(raiz.direita);
+            System.out.print(raiz.dado + " ");
         }
-        postOrder(raiz.esquerda);
-        postOrder(raiz.direita);
-        System.out.print(raiz.dado + " ");
     }
 
     public void postOrder() {
@@ -63,13 +64,13 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     public T buscar(T dadoBusca) {
         return (T) buscar(this.raiz, dadoBusca);
-        
     }
 
     private T buscar(Node<T> raiz, T dadoBusca) {
         if (raiz == null)
             return null; // Dado não encontrado na árvore
 
+        System.out.println("Comparando " + dadoBusca + " com " + raiz.dado);
         if (raiz.dado.equals(dadoBusca))
             return raiz.dado; // Dado encontrado
 
@@ -90,7 +91,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         pai = raiz;
         nova = raiz.direita;
         while (nova.esquerda != null) {
-            pai = pai;
+            pai = nova;
             nova = nova.esquerda;
         } // fim while
 
@@ -115,7 +116,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         if (raiz.dado.equals(dadoRemover)) {
             System.out.println("Encontrado - removendo");
-            return removeNode(raiz);
+            return removeNode(raiz);// chama a função que remove o nó
         }
         if (dadoRemover.compareTo(raiz.dado) < 0)
             raiz.esquerda = remove(raiz.esquerda, dadoRemover);
@@ -124,7 +125,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         return raiz;
     } // fim buscaRemove
-
-
 
 }
